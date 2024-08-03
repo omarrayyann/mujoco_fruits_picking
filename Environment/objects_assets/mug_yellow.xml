@@ -1,0 +1,77 @@
+<mujoco model="model">
+  <asset>
+    <texture type="2d" name="texture_mug_yellow" file="./../Environment/objects_assets/mug_yellow/texture.png"/>
+    <material name="material_0_mug_yellow" texture="texture_mug_yellow" specular="0.5" shininess="0.5"/>
+    <mesh name="mug_yellow" file="../../../Environment/objects_assets/mug_yellow/model.obj"/>
+    <mesh name="model_collision_mug_yellow_0" file="../../../Environment/objects_assets/mug_yellow/model_collision_0.obj"/>
+    <mesh name="model_collision_mug_yellow_1" file="../../../Environment/objects_assets/mug_yellow/model_collision_1.obj"/>
+    <mesh name="model_collision_mug_yellow_2" file="../../../Environment/objects_assets/mug_yellow/model_collision_2.obj"/>
+    <mesh name="model_collision_mug_yellow_3" file="../../../Environment/objects_assets/mug_yellow/model_collision_3.obj"/>
+    <mesh name="model_collision_mug_yellow_4" file="../../../Environment/objects_assets/mug_yellow/model_collision_4.obj"/>
+    <mesh name="model_collision_mug_yellow_5" file="../../../Environment/objects_assets/mug_yellow/model_collision_5.obj"/>
+    <mesh name="model_collision_mug_yellow_6" file="../../../Environment/objects_assets/mug_yellow/model_collision_6.obj"/>
+    <mesh name="model_collision_mug_yellow_7" file="../../../Environment/objects_assets/mug_yellow/model_collision_7.obj"/>
+    <mesh name="model_collision_mug_yellow_8" file="../../../Environment/objects_assets/mug_yellow/model_collision_8.obj"/>
+    <mesh name="model_collision_mug_yellow_9" file="../../../Environment/objects_assets/mug_yellow/model_collision_9.obj"/>
+    <mesh name="model_collision_mug_yellow_10" file="../../../Environment/objects_assets/mug_yellow/model_collision_10.obj"/>
+    <mesh name="model_collision_mug_yellow_11" file="../../../Environment/objects_assets/mug_yellow/model_collision_11.obj"/>
+    <mesh name="model_collision_mug_yellow_12" file="../../../Environment/objects_assets/mug_yellow/model_collision_12.obj"/>
+    <mesh name="model_collision_mug_yellow_13" file="../../../Environment/objects_assets/mug_yellow/model_collision_13.obj"/>
+    <mesh name="model_collision_mug_yellow_14" file="../../../Environment/objects_assets/mug_yellow/model_collision_14.obj"/>
+    <mesh name="model_collision_mug_yellow_15" file="../../../Environment/objects_assets/mug_yellow/model_collision_15.obj"/>
+    <mesh name="model_collision_mug_yellow_16" file="../../../Environment/objects_assets/mug_yellow/model_collision_16.obj"/>
+    <mesh name="model_collision_mug_yellow_17" file="../../../Environment/objects_assets/mug_yellow/model_collision_17.obj"/>
+    <mesh name="model_collision_mug_yellow_18" file="../../../Environment/objects_assets/mug_yellow/model_collision_18.obj"/>
+    <mesh name="model_collision_mug_yellow_19" file="../../../Environment/objects_assets/mug_yellow/model_collision_19.obj"/>
+    <mesh name="model_collision_mug_yellow_20" file="../../../Environment/objects_assets/mug_yellow/model_collision_20.obj"/>
+    <mesh name="model_collision_mug_yellow_21" file="../../../Environment/objects_assets/mug_yellow/model_collision_21.obj"/>
+    <mesh name="model_collision_mug_yellow_22" file="../../../Environment/objects_assets/mug_yellow/model_collision_22.obj"/>
+    <mesh name="model_collision_mug_yellow_23" file="../../../Environment/objects_assets/mug_yellow/model_collision_23.obj"/>
+    <mesh name="model_collision_mug_yellow_24" file="../../../Environment/objects_assets/mug_yellow/model_collision_24.obj"/>
+    <mesh name="model_collision_mug_yellow_25" file="../../../Environment/objects_assets/mug_yellow/model_collision_25.obj"/>
+    <mesh name="model_collision_mug_yellow_26" file="../../../Environment/objects_assets/mug_yellow/model_collision_26.obj"/>
+    <mesh name="model_collision_mug_yellow_27" file="../../../Environment/objects_assets/mug_yellow/model_collision_27.obj"/>
+    <mesh name="model_collision_mug_yellow_28" file="../../../Environment/objects_assets/mug_yellow/model_collision_28.obj"/>
+    <mesh name="model_collision_mug_yellow_29" file="../../../Environment/objects_assets/mug_yellow/model_collision_29.obj"/>
+    <mesh name="model_collision_mug_yellow_30" file="../../../Environment/objects_assets/mug_yellow/model_collision_30.obj"/>
+    <mesh name="model_collision_mug_yellow_31" file="../../../Environment/objects_assets/mug_yellow/model_collision_31.obj"/>
+  </asset>
+  <worldbody>
+    <body name="mug_yellow" pos="-1.4 0.75 0.8" quat="1 0 0 0">
+                <joint name="mug_yellow_joint" type="free" damping="0.1"/>
+      <geom material="material_0_mug_yellow" mesh="mug_yellow" type="mesh" contype="0" conaffinity="0" group="2"/>
+      <geom mesh="model_collision_mug_yellow_0" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_1" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_2" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_3" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_4" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_5" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_6" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_7" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_8" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_9" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_10" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_11" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_12" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_13" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_14" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_15" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_16" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_17" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_18" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_19" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_20" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_21" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_22" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_23" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_24" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_25" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_26" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_27" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_28" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_29" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_30" type="mesh" group="3"/>
+      <geom mesh="model_collision_mug_yellow_31" type="mesh" group="3"/>
+    </body>
+  </worldbody>
+</mujoco>

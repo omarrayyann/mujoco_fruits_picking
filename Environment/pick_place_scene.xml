@@ -1,0 +1,82 @@
+<?xml version="1.0" ?>
+<mujoco model="iiwa14_scene">
+    <!-- Include the KUKA robot and other necessary components -->
+    <include file="kuka_iiwa_14/iiwa14_gripper.xml"/>
+    <include file="objects_assets/table.xml"/>
+    <include file="objects_assets/orange.xml"/>
+    <include file="objects_assets/green_bowl.xml"/>
+    <!-- <include file="objects_assets/d435i.xml"/> -->
+
+    <!-- World and visual options -->
+    <statistic center="0.2 0 0.2" extent="1.0"/>
+
+    <visual>
+        <headlight diffuse="0.3 0.3 0.3" ambient="0.2 0.2 0.2" specular="0 0 0"/>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <global azimuth="-120" elevation="-20"/>
+        <quality shadowsize="0"/>
+    </visual>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+        <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+          markrgb="0.8 0.8 0.8" width="300" height="300"/>
+        <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+          <texture name="carpet_texture" type="2d" file="objects_assets/carpet/texture.png"/>        
+        <material name="carpet_material" texture="carpet_texture" />
+
+            <texture type="2d" name="floor_texture" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"
+          markrgb="0.8 0.8 0.8" width="300" height="300"/>
+
+        <material name="floor_material" texture="floor_texture" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    </asset>
+
+    <worldbody>
+
+        <light pos="0 0 4.5" dir="0 0 -1" directional="true"/>
+         <light pos="0 4.5 0.6" dir="0 -1 0" directional="true"/>
+        <light pos="0 -4.5 0.6" dir="0 1 0" directional="true"/>
+       
+
+       
+
+            <geom name="floor" size="3 3 0.05" type="plane" material="floor_material"/>
+
+        <!-- <body name="carpet" pos="0.54 0 0.001" quat="1 0 0 1">
+                <geom name="carpet_geom" type="plane" size="0.55 0.35 0.05" material="carpet_material"/>
+            </body>
+        -->
+      <camera name="third_pov"pos="0.93 -0.64  0.73"  quat="0.86 0.42 0.17 0.23"   mode="fixed" fovy="58"/>
+        
+      <!-- <body name="d435i"  pos="0.93 -0.64  0.73"  quat="0.86 0.42 0.17 0.23" childclass="d435i">
+      <camera name="third_pov" pos="0 0 0"  mode="fixed" fovy="58"/>
+      <body name="d435i_in"  quat="0 0 1 0" >
+        <geom mesh="d435i_0" material="IR_Lens" class="visual435i"/>
+        <geom mesh="d435i_1" material="IR_Emitter_Lens" class="visual435i"/>
+        <geom mesh="d435i_2" material="IR_Rim" class="visual435i"/>
+        <geom mesh="d435i_3" material="IR_Lens" class="visual435i"/>
+        <geom mesh="d435i_4" material="Cameras_Gray" class="visual435i"/>
+        <geom mesh="d435i_5" material="Black_Acrylic" class="visual435i"/>
+        <geom mesh="d435i_6" material="Black_Acrylic" class="visual435i"/>
+        <geom mesh="d435i_7" material="RGB_Pupil" class="visual435i"/>
+        <geom mesh="d435i_8" mass="0.072" material="Metal_Casing" class="visual435i"/>
+        <geom class="collision435i" type="capsule" mesh="d435i_8"/>
+        </body>
+      </body> -->
+    
+       <!-- <body name="block" pos="0.35 0.03 0.25">
+            <joint name="block_joint" type="free" damping="0.001"/>
+            <geom name="cube_geom" type="box" size="0.02 0.02 0.02"  rgba="0.7 0.2 0.5 1"/>
+        </body> -->
+
+    <!-- <body name="eef_target" pos="0.5 0. 0.4" quat="0 1 0 0">
+      <geom name="ss" type="sphere" size="0.01" pos="0.0 0.0 0.0" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
+    </body> -->
+
+        
+
+        <geom name="eef_target" type="sphere" size="0.01" pos="100 100 0.001" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
+
+    </worldbody>
+</mujoco>

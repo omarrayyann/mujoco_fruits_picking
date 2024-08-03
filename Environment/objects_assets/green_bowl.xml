@@ -1,0 +1,76 @@
+<mujoco model="model">
+  <asset>
+    <texture type="2d" name="texture_green_bowl" file="./../Environment/objects_assets/green_bowl/texture.png"/>
+    <material name="material_0_green_bowl" texture="texture_green_bowl" specular="0.5" shininess="0.5"/>
+    <mesh name="green_bowl" file="../../../Environment/objects_assets/green_bowl/model.obj"/>
+    <mesh name="model_collision_green_bowl_0" file="../../../Environment/objects_assets/green_bowl/model_collision_0.obj"/>
+    <mesh name="model_collision_green_bowl_1" file="../../../Environment/objects_assets/green_bowl/model_collision_1.obj"/>
+    <mesh name="model_collision_green_bowl_2" file="../../../Environment/objects_assets/green_bowl/model_collision_2.obj"/>
+    <mesh name="model_collision_green_bowl_3" file="../../../Environment/objects_assets/green_bowl/model_collision_3.obj"/>
+    <mesh name="model_collision_green_bowl_4" file="../../../Environment/objects_assets/green_bowl/model_collision_4.obj"/>
+    <mesh name="model_collision_green_bowl_5" file="../../../Environment/objects_assets/green_bowl/model_collision_5.obj"/>
+    <mesh name="model_collision_green_bowl_6" file="../../../Environment/objects_assets/green_bowl/model_collision_6.obj"/>
+    <mesh name="model_collision_green_bowl_7" file="../../../Environment/objects_assets/green_bowl/model_collision_7.obj"/>
+    <mesh name="model_collision_green_bowl_8" file="../../../Environment/objects_assets/green_bowl/model_collision_8.obj"/>
+    <mesh name="model_collision_green_bowl_9" file="../../../Environment/objects_assets/green_bowl/model_collision_9.obj"/>
+    <mesh name="model_collision_green_bowl_10" file="../../../Environment/objects_assets/green_bowl/model_collision_10.obj"/>
+    <mesh name="model_collision_green_bowl_11" file="../../../Environment/objects_assets/green_bowl/model_collision_11.obj"/>
+    <mesh name="model_collision_green_bowl_12" file="../../../Environment/objects_assets/green_bowl/model_collision_12.obj"/>
+    <mesh name="model_collision_green_bowl_13" file="../../../Environment/objects_assets/green_bowl/model_collision_13.obj"/>
+    <mesh name="model_collision_green_bowl_14" file="../../../Environment/objects_assets/green_bowl/model_collision_14.obj"/>
+    <mesh name="model_collision_green_bowl_15" file="../../../Environment/objects_assets/green_bowl/model_collision_15.obj"/>
+    <mesh name="model_collision_green_bowl_16" file="../../../Environment/objects_assets/green_bowl/model_collision_16.obj"/>
+    <mesh name="model_collision_green_bowl_17" file="../../../Environment/objects_assets/green_bowl/model_collision_17.obj"/>
+    <mesh name="model_collision_green_bowl_18" file="../../../Environment/objects_assets/green_bowl/model_collision_18.obj"/>
+    <mesh name="model_collision_green_bowl_19" file="../../../Environment/objects_assets/green_bowl/model_collision_19.obj"/>
+    <mesh name="model_collision_green_bowl_20" file="../../../Environment/objects_assets/green_bowl/model_collision_20.obj"/>
+    <mesh name="model_collision_green_bowl_21" file="../../../Environment/objects_assets/green_bowl/model_collision_21.obj"/>
+    <mesh name="model_collision_green_bowl_22" file="../../../Environment/objects_assets/green_bowl/model_collision_22.obj"/>
+    <mesh name="model_collision_green_bowl_23" file="../../../Environment/objects_assets/green_bowl/model_collision_23.obj"/>
+    <mesh name="model_collision_green_bowl_24" file="../../../Environment/objects_assets/green_bowl/model_collision_24.obj"/>
+    <mesh name="model_collision_green_bowl_25" file="../../../Environment/objects_assets/green_bowl/model_collision_25.obj"/>
+    <mesh name="model_collision_green_bowl_26" file="../../../Environment/objects_assets/green_bowl/model_collision_26.obj"/>
+    <mesh name="model_collision_green_bowl_27" file="../../../Environment/objects_assets/green_bowl/model_collision_27.obj"/>
+    <mesh name="model_collision_green_bowl_28" file="../../../Environment/objects_assets/green_bowl/model_collision_28.obj"/>
+    <mesh name="model_collision_green_bowl_29" file="../../../Environment/objects_assets/green_bowl/model_collision_29.obj"/>
+    <mesh name="model_collision_green_bowl_30" file="../../../Environment/objects_assets/green_bowl/model_collision_30.obj"/>
+    <mesh name="model_collision_green_bowl_31" file="../../../Environment/objects_assets/green_bowl/model_collision_31.obj"/>
+  </asset>
+  <worldbody>
+    <body name="green_bowl" pos="0.55 1.0 0.21">
+      <geom material="material_0_green_bowl" mesh="green_bowl" type="mesh" contype="0" conaffinity="0" group="2"/>
+      <geom mesh="model_collision_green_bowl_0" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_1" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_2" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_3" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_4" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_5" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_6" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_7" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_8" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_9" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_10" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_11" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_12" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_13" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_14" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_15" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_16" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_17" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_18" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_19" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_20" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_21" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_22" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_23" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_24" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_25" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_26" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_27" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_28" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_29" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_30" type="mesh" group="3"/>
+      <geom mesh="model_collision_green_bowl_31" type="mesh" group="3"/>
+    </body>
+  </worldbody>
+</mujoco>

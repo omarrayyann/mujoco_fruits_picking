@@ -1,0 +1,77 @@
+<mujoco model="model">
+  <asset>
+    <texture type="2d" name="texture_plate" file="./../Environment/objects_assets/plate/texture.png"/>
+    <material name="material_0_plate" texture="texture_plate" specular="0.5" shininess="0.5"/>
+    <mesh name="plate" file="../../..//Environment/objects_assets/plate/model.obj"/>
+    <mesh name="model_collision_plate_0" file="../../..//Environment/objects_assets/plate/model_collision_0.obj"/>
+    <mesh name="model_collision_plate_1" file="../../..//Environment/objects_assets/plate/model_collision_1.obj"/>
+    <mesh name="model_collision_plate_2" file="../../..//Environment/objects_assets/plate/model_collision_2.obj"/>
+    <mesh name="model_collision_plate_3" file="../../..//Environment/objects_assets/plate/model_collision_3.obj"/>
+    <mesh name="model_collision_plate_4" file="../../..//Environment/objects_assets/plate/model_collision_4.obj"/>
+    <mesh name="model_collision_plate_5" file="../../..//Environment/objects_assets/plate/model_collision_5.obj"/>
+    <mesh name="model_collision_plate_6" file="../../..//Environment/objects_assets/plate/model_collision_6.obj"/>
+    <mesh name="model_collision_plate_7" file="../../..//Environment/objects_assets/plate/model_collision_7.obj"/>
+    <mesh name="model_collision_plate_8" file="../../..//Environment/objects_assets/plate/model_collision_8.obj"/>
+    <mesh name="model_collision_plate_9" file="../../..//Environment/objects_assets/plate/model_collision_9.obj"/>
+    <mesh name="model_collision_plate_10" file="../../..//Environment/objects_assets/plate/model_collision_10.obj"/>
+    <mesh name="model_collision_plate_11" file="../../..//Environment/objects_assets/plate/model_collision_11.obj"/>
+    <mesh name="model_collision_plate_12" file="../../..//Environment/objects_assets/plate/model_collision_12.obj"/>
+    <mesh name="model_collision_plate_13" file="../../..//Environment/objects_assets/plate/model_collision_13.obj"/>
+    <mesh name="model_collision_plate_14" file="../../..//Environment/objects_assets/plate/model_collision_14.obj"/>
+    <mesh name="model_collision_plate_15" file="../../..//Environment/objects_assets/plate/model_collision_15.obj"/>
+    <mesh name="model_collision_plate_16" file="../../..//Environment/objects_assets/plate/model_collision_16.obj"/>
+    <mesh name="model_collision_plate_17" file="../../..//Environment/objects_assets/plate/model_collision_17.obj"/>
+    <mesh name="model_collision_plate_18" file="../../..//Environment/objects_assets/plate/model_collision_18.obj"/>
+    <mesh name="model_collision_plate_19" file="../../..//Environment/objects_assets/plate/model_collision_19.obj"/>
+    <mesh name="model_collision_plate_20" file="../../..//Environment/objects_assets/plate/model_collision_20.obj"/>
+    <mesh name="model_collision_plate_21" file="../../..//Environment/objects_assets/plate/model_collision_21.obj"/>
+    <mesh name="model_collision_plate_22" file="../../..//Environment/objects_assets/plate/model_collision_22.obj"/>
+    <mesh name="model_collision_plate_23" file="../../..//Environment/objects_assets/plate/model_collision_23.obj"/>
+    <mesh name="model_collision_plate_24" file="../../..//Environment/objects_assets/plate/model_collision_24.obj"/>
+    <mesh name="model_collision_plate_25" file="../../..//Environment/objects_assets/plate/model_collision_25.obj"/>
+    <mesh name="model_collision_plate_26" file="../../..//Environment/objects_assets/plate/model_collision_26.obj"/>
+    <mesh name="model_collision_plate_27" file="../../..//Environment/objects_assets/plate/model_collision_27.obj"/>
+    <mesh name="model_collision_plate_28" file="../../..//Environment/objects_assets/plate/model_collision_28.obj"/>
+    <mesh name="model_collision_plate_29" file="../../..//Environment/objects_assets/plate/model_collision_29.obj"/>
+    <mesh name="model_collision_plate_30" file="../../..//Environment/objects_assets/plate/model_collision_30.obj"/>
+    <mesh name="model_collision_plate_31" file="../../..//Environment/objects_assets/plate/model_collision_31.obj"/>
+  </asset>
+  <worldbody>
+    <body name="plate" pos="0.55 0.0 0.3"> 
+    <!-- <freejoint/> -->
+      <geom material="material_0_plate" mesh="plate" type="mesh" contype="0" conaffinity="0" group="2" mass="0.01"/>
+      <geom mesh="model_collision_plate_0" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_1" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_2" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_3" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_4" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_5" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_6" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_7" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_8" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_9" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_10" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_11" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_12" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_13" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_14" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_15" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_16" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_17" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_18" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_19" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_20" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_21" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_22" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_23" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_24" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_25" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_26" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_27" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_28" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_29" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_30" type="mesh" group="3"/>
+      <geom mesh="model_collision_plate_31" type="mesh" group="3"/>
+    </body>
+  </worldbody>
+</mujoco>

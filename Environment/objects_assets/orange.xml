@@ -1,0 +1,16 @@
+<mujoco model="orange">
+  <asset>
+    <texture file="./../Environment/objects_assets/orange/orange.png" type="2d" name="tex-orange" />
+    <material name="orange_fruit_mat" reflectance="0.7" texrepeat="15 15" texture="tex-orange" texuniform="true"/>
+  </asset>
+  
+  <worldbody>
+            <!-- <geom name="sphere_geom" type="sphere" size="0.5" rgba="1 0 0 1" friction="1 1 1"/> -->
+                  <body name="orange_fruit" pos="0.55 0.03 0.25">
+                  <joint name="orange_joint" type="free" damping="0.1"/>
+
+        <geom pos="0 0 0" size="0.025" type="sphere" mass="0.1" material="orange_fruit_mat" friction="1 1 1"/>
+      
+    </body>
+  </worldbody>
+</mujoco>

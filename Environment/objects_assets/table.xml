@@ -1,0 +1,26 @@
+<mujoco model="table">
+    <asset>
+        <texture name="wood" type="2d" file="../Environment/objects_assets/common/textures/wood0.png"/>
+        <material name="wood_mat" rgba='0.9 0.9 0.9 1' texture="wood" texrepeat="5 5" reflectance="0.0"/>
+        <material name="leg_mat" rgba='0.0 0.0 0.0 1' reflectance="0.0"/>
+    </asset>
+    <worldbody>
+        <!-- Table Top -->
+        <body name="table" pos="0.55 0.0 0.2">
+            <geom name="table_top" type="box" size="0.25 0.4 0.01" material="wood_mat"/>
+            <!-- Table Legs -->
+            <body name="leg1" pos="-0.2 -0.35 -0.1">
+                <geom type="cylinder" size="0.015 0.1 0.1" material="leg_mat"/>
+            </body>
+            <body name="leg2" pos="0.2 -0.35 -0.1">
+                <geom type="cylinder" size="0.015 0.1 0.1" material="leg_mat"/>
+            </body>
+            <body name="leg3" pos="-0.2 0.35 -0.1">
+                <geom type="cylinder" size="0.015 0.1 0.1" material="leg_mat"/>
+            </body>
+            <body name="leg4" pos="0.2 0.35 -0.1">
+                <geom type="cylinder" size="0.015 0.1 0.1" material="leg_mat"/>
+            </body>
+        </body>
+    </worldbody>
+</mujoco>
