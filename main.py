@@ -16,7 +16,7 @@ class ImitationSimulation:
     def __init__(self):
 
         # Configs
-        self.scene_path = 'Environment/pick_place_scene.xml'
+        self.scene_path = 'Environment/scene.xml'
         self.mjmodel = mujoco.MjModel.from_xml_path(self.scene_path)
         self.mjdata = mujoco.MjData(self.mjmodel)
         self.dt = 0.002
@@ -69,11 +69,21 @@ class ImitationSimulation:
         self.grasp_actuator_id = self.mjmodel.actuator("fingers_actuator").id 
         self.mjdata.qpos[self.actuator_ids] = self.q0
 
-        # MujocoAR
-        self.mujocoAR = MujocoARConnector(controls_frequency=10)
+        # MujocoAR Initialization
+        self.mujocoAR = MujocoARConnector(controls_frequency=10,mujoco_model=self.mjmodel,mujoco_data=self.mjdata)
 
-        # if self.rerun:
-        #     rr.init("IIWA-KUKA", spawn=True)
+        # Linking the target site with the AR position
+        self.mujocoAR.link_site(
+            name="eef_target",
+            scale=2.0,
+            translation=self.pos_origin,
+            toggle_fn=lambda: setattr(self, 'grasp', not self.grasp),
+            button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time())) if time.time() - self.placement_time > 2.0 else None,
+            disable_rot=True,
+        )
+
+        if self.rerun:
+            rr.init("IIWA-KUKA", spawn=True)
     
     def is_valid_position(self, pos1, pos2, min_dist):
         if pos1 is None or pos2 is None:
@@ -153,14 +163,8 @@ class ImitationSimulation:
                     if time.time()-self.placement_time > 2.0 or self.placement_time==-1:
                         self.random_placement()
                         self.placement_time = time.time()
-
-                online_data = self.mujocoAR.get_latest_data()
-                if online_data["position"] is not None:
-                    online_pos = online_data["position"].copy()
-                    online_rot = online_data["rotation"].copy()
-                    self.button = online_data["button"]
-                    self.grasp = online_data["toggle"]
-                    self.target_pos = self.pos_origin + 2.0*online_pos
+                
+                self.target_pos = self.mjdata.site("eef_target").xpos.copy()
                     
                 time_until_next_step = self.dt - (time.time() - step_start)
                 if time_until_next_step > 0:

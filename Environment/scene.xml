@@ -34,6 +34,9 @@
 
     <worldbody>
 
+    <site name="eef_target" pos="0.5 0.0 0.4" />
+
+
         <light pos="0 0 4.5" dir="0 0 -1" directional="true"/>
          <light pos="0 4.5 0.6" dir="0 -1 0" directional="true"/>
         <light pos="0 -4.5 0.6" dir="0 1 0" directional="true"/>
@@ -74,9 +77,10 @@
       <geom name="ss" type="sphere" size="0.01" pos="0.0 0.0 0.0" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
     </body> -->
 
-        
+        <!-- <body name="test_ar">
+        <geom name="test_ar_geom" type="sphere" size="0.01" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
+        </body> -->
 
-        <geom name="eef_target" type="sphere" size="0.01" pos="100 100 0.001" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
 
     </worldbody>
 </mujoco>
