@@ -34,24 +34,21 @@
 
     <worldbody>
 
-    <site name="eef_target" pos="0.5 0.0 0.4" />
-
+    <site name="eef_target" pos="0.5 0.0 0.4" rgba="0 0 0 0" />
 
         <light pos="0 0 4.5" dir="0 0 -1" directional="true"/>
          <light pos="0 4.5 0.6" dir="0 -1 0" directional="true"/>
         <light pos="0 -4.5 0.6" dir="0 1 0" directional="true"/>
        
-
-       
-
             <geom name="floor" size="3 3 0.05" type="plane" material="floor_material"/>
 
         <!-- <body name="carpet" pos="0.54 0 0.001" quat="1 0 0 1">
                 <geom name="carpet_geom" type="plane" size="0.55 0.35 0.05" material="carpet_material"/>
             </body>
         -->
-      <camera name="third_pov"pos="0.93 -0.64  0.73"  quat="0.86 0.42 0.17 0.23"   mode="fixed" fovy="58"/>
-        
+      <camera name="side_camera" pos="0.15 -0.5  0.5734195" quat="0.83812764  0.36486969 -0.13685453 -0.3816844" mode="fixed" fovy="58"/>
+            <camera name="front_camera" pos="1.2 0.0 0.5"  quat="0.6 0.387 0.387 0.6"  mode="fixed" fovy="58"/>
+
       <!-- <body name="d435i"  pos="0.93 -0.64  0.73"  quat="0.86 0.42 0.17 0.23" childclass="d435i">
       <camera name="third_pov" pos="0 0 0"  mode="fixed" fovy="58"/>
       <body name="d435i_in"  quat="0 0 1 0" >

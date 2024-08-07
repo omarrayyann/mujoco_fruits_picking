@@ -3,13 +3,10 @@ import mujoco.viewer
 import numpy as np
 import time
 from Utils.utils import *
-import threading
 from controller import OpsaceController
 from mujoco_ar import MujocoARConnector
 import random
 import rerun as rr
-import cv2
-import torch
 
 class ImitationSimulation:
     
@@ -63,7 +60,7 @@ class ImitationSimulation:
 
         # Controller
         self.controller = OpsaceController(self.mjmodel,self.joint_names,self.eef_site_name)
-        self.q0 = np.array([0, 0.2448, 0, -1.4204, 0, 1.4765, 0])
+        self.q0 = np.array([0, 0.2686, 0, -1.5423, 0, 1.3307, 0])
         self.dof_ids = np.array([self.mjmodel.joint(name).id for name in self.joint_names])
         self.actuator_ids = np.array([self.mjmodel.actuator(name).id for name in self.joint_names])
         self.grasp_actuator_id = self.mjmodel.actuator("fingers_actuator").id 
