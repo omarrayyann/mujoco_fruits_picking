@@ -3,7 +3,7 @@ import mujoco.viewer
 import numpy as np
 import time
 from Utils.utils import *
-    from controller import OpsaceController
+from controller import OpsaceController
 from mujoco_ar import MujocoARConnector
 import random
 import rerun as rr
@@ -162,7 +162,7 @@ class ImitationSimulation:
                         self.placement_time = time.time()
                 
                 self.target_pos = self.mjdata.site("eef_target").xpos.copy()
-                    
+
                 time_until_next_step = self.dt - (time.time() - step_start)
                 if time_until_next_step > 0:
                     time.sleep(time_until_next_step)
