@@ -199,7 +199,7 @@
 
                         <!-- <camera name="gripper_camera"  pos="0.07 0.0 0.03" quat="0.1227878 0.69636424 0.69636424 0.1227878"  mode="fixed" fovy="90"/> -->
 
-                        <camera name="gripper_camera" pos="0.1 0.0 0.00" quat="0.0 0.7071 0.7071 0.0" mode="fixed" fovy="100"/>
+                        <camera name="top_camera" pos="0.1 0.0 0.00" quat="0.0 0.7071 0.7071 0.0" mode="fixed" fovy="100"/>
 
                          <!-- <body name="d435i_2" pos="0.07 0.0 0.03" quat="0.1227878 0.69636424 0.69636424 0.1227878" childclass="d435i">
                         <camera name="gripper_camera" pos="0 0 0"  mode="fixed" fovy="90"/>

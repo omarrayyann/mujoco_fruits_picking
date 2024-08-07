@@ -3,7 +3,7 @@ import mujoco.viewer
 import numpy as np
 import time
 from Utils.utils import *
-from controller import OpsaceController
+    from controller import OpsaceController
 from mujoco_ar import MujocoARConnector
 import random
 import rerun as rr
@@ -25,7 +25,7 @@ class ImitationSimulation:
         self.rgb_renderer = mujoco.Renderer(self.mjmodel, height=120, width=160)
         self.depth_renderer = mujoco.Renderer(self.mjmodel, height=120, width=160)
         self.depth_renderer.enable_depth_rendering()
-        self.cameras = ["third_pov","gripper_camera"]
+        self.cameras = ["front_camera","side_camera","top_camera"]
 
         # Override the simulation timestep
         self.pick_object = "orange_fruit"
