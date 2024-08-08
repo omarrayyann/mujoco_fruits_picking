@@ -4,7 +4,7 @@ import numpy as np
 import time
 from Utils.utils import *
 from controller import OpsaceController
-from connector import MujocoARConnector
+from mujoco_ar import MujocoARConnector
 import random
 import rerun as rr
 

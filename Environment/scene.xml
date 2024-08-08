@@ -43,38 +43,9 @@
        
             <geom name="floor" size="3 3 0.05" type="plane" material="floor_material"/>
 
-        <!-- <body name="carpet" pos="0.54 0 0.001" quat="1 0 0 1">
-                <geom name="carpet_geom" type="plane" size="0.55 0.35 0.05" material="carpet_material"/>
-            </body>
-        -->
+       
       <camera name="side_camera" pos="0.15 -0.5  0.5734195" quat="0.83812764  0.36486969 -0.13685453 -0.3816844" mode="fixed" fovy="58"/>
-            <camera name="front_camera" pos="1.2 0.0 0.5"  quat="0.6 0.387 0.387 0.6"  mode="fixed" fovy="58"/>
-
-      <!-- <body name="d435i"  pos="0.93 -0.64  0.73"  quat="0.86 0.42 0.17 0.23" childclass="d435i">
-      <camera name="third_pov" pos="0 0 0"  mode="fixed" fovy="58"/>
-      <body name="d435i_in"  quat="0 0 1 0" >
-        <geom mesh="d435i_0" material="IR_Lens" class="visual435i"/>
-        <geom mesh="d435i_1" material="IR_Emitter_Lens" class="visual435i"/>
-        <geom mesh="d435i_2" material="IR_Rim" class="visual435i"/>
-        <geom mesh="d435i_3" material="IR_Lens" class="visual435i"/>
-        <geom mesh="d435i_4" material="Cameras_Gray" class="visual435i"/>
-        <geom mesh="d435i_5" material="Black_Acrylic" class="visual435i"/>
-        <geom mesh="d435i_6" material="Black_Acrylic" class="visual435i"/>
-        <geom mesh="d435i_7" material="RGB_Pupil" class="visual435i"/>
-        <geom mesh="d435i_8" mass="0.072" material="Metal_Casing" class="visual435i"/>
-        <geom class="collision435i" type="capsule" mesh="d435i_8"/>
-        </body>
-      </body> -->
-    
-   
-
-    <!-- <body name="eef_target" pos="0.5 0. 0.4" quat="0 1 0 0">
-      <geom name="ss" type="sphere" size="0.01" pos="0.0 0.0 0.0" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
-    </body> -->
-
-        <!-- <body name="test_ar">
-        <geom name="test_ar_geom" type="sphere" size="0.01" rgba="1 1 0 1.0" contype="0" conaffinity="0"/>
-        </body> -->
+            <camera name="front_camera" pos="1.2 0.0 0.6"  quat="0.6 0.387 0.387 0.6"  mode="fixed" fovy="58"/>
 
 
     </worldbody>
