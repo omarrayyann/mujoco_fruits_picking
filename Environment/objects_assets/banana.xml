@@ -1,0 +1,45 @@
+
+<mujoco model="banana">
+
+
+     <asset>
+
+     <texture file="./../Environment/objects_assets/banana/banana.png" type="2d" name="tex-banana" />
+    <material name="MatObject_Banana" reflectance="0.7" texrepeat="15 15" texture="tex-banana" texuniform="true"/>
+
+    </asset>
+
+    
+    <default>
+        <geom friction="1 0.5 0.01" margin="0.0005" density="1250" />
+        <site size="0.005 0 0" rgba="0.4 0.9 0.4 1" />
+        <default class="object_visual_banana">
+        <geom type="mesh" contype="0" conaffinity="0" mass="0.01" group="1" material="MatObject_Banana"/>
+        </default>
+        <default class="object_contact_banana">
+        <geom type="mesh" density="1250" condim="4" rgba="0 1 0 0"/>
+        </default>
+    </default>
+
+    <asset>
+        <mesh name="banana" file="../../../Environment/objects_assets/banana/banana.stl" scale="0.7 0.7 0.7"/>
+        <mesh name="contact0_banana" file="../../../Environment/objects_assets/banana/contact0.stl"  scale="0.7 0.7 0.7"/>
+        <mesh name="contact1_banana" file="../../../Environment/objects_assets/banana/contact1.stl"  scale="0.7 0.7 0.7"/>
+        <mesh name="contact2_banana" file="../../../Environment/objects_assets/banana/contact2.stl"  scale="0.7 0.7 0.7"/>
+        <mesh name="contact3_banana" file="../../../Environment/objects_assets/banana/contact3.stl"  scale="0.7 0.7 0.7"/>
+        <mesh name="contact4_banana" file="../../../Environment/objects_assets/banana/contact4.stl"  scale="0.7 0.7 0.7"/>
+        <material name="MatObject" specular="0.75" shininess="0.1" reflectance="0.5" rgba="0.9 0.7 0.5 1" />
+    </asset>
+    
+    <worldbody>
+        <body name="banana" pos="1.4 -1.4 0.8" >
+                  <joint name="banana_joint" type="free" damping="0.1"/>
+            <geom name="banana_visual" class="object_visual_banana" mesh="banana" rgba="1 1 0 1.0"friction="1 0.5 0.01" margin="0.0005" density="10" />
+            <geom name="banana_contact0" class="object_contact_banana" mesh="contact0_banana" friction="1 0.5 0.01" margin="0.0005" density="10" />
+            <geom name="banana_contact1" class="object_contact_banana" mesh="contact1_banana" friction="1 0.5 0.01" margin="0.0005" density="10" />
+            <geom name="banana_contact2" class="object_contact_banana" mesh="contact2_banana" friction="1 0.5 0.01" margin="0.0005" density="10"  />
+            <geom name="banana_contact3" class="object_contact_banana" mesh="contact3_banana" friction="1 0.5 0.01" margin="0.0005" density="10"/>
+            <geom name="banana_contact4" class="object_contact_banana" mesh="contact4_banana" friction="1 0.5 0.01" margin="0.0005" density="10"  />
+        </body>
+    </worldbody>
+</mujoco>

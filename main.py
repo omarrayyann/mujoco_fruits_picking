@@ -4,7 +4,7 @@ import numpy as np
 import time
 from Utils.utils import *
 from controller import OpsaceController
-from mujoco_ar import MujocoARConnector
+from connector import MujocoARConnector
 import random
 import rerun as rr
 
@@ -28,9 +28,9 @@ class ImitationSimulation:
         self.cameras = ["front_camera","side_camera","top_camera"]
 
         # Override the simulation timestep
-        self.pick_object = "orange_fruit"
-        self.pick_joint = "orange_joint"
-        self.place_object = "green_bowl"
+        self.pick_objects = ["banana","orange_fruit"]
+        self.pick_joints = ["banana_joint","orange_joint"]
+        self.place_object = "plate"
         self.mjmodel.opt.timestep = self.dt
         self.frequency = 1000
         self.target_pos = np.array([0.5, 0.0, 0.4])
@@ -67,7 +67,7 @@ class ImitationSimulation:
         self.mjdata.qpos[self.actuator_ids] = self.q0
 
         # MujocoAR Initialization
-        self.mujocoAR = MujocoARConnector(controls_frequency=10,mujoco_model=self.mjmodel,mujoco_data=self.mjdata)
+        self.mujocoAR = MujocoARConnector(mujoco_model=self.mjmodel,mujoco_data=self.mjdata)
 
         # Linking the target site with the AR position
         self.mujocoAR.link_site(
@@ -82,12 +82,24 @@ class ImitationSimulation:
         if self.rerun:
             rr.init("IIWA-KUKA", spawn=True)
     
-    def is_valid_position(self, pos1, pos2, min_dist):
-        if pos1 is None or pos2 is None:
+    def is_valid_position(self, pos1, pos2_multiple, min_dist):
+        if pos1 is None or pos2_multiple is None:
             return False
-        distance = np.linalg.norm(np.array(pos1[:2]) - np.array(pos2[:2])) 
-        return distance>=min_dist
-    
+        for pos2 in pos2_multiple:
+            distance = np.linalg.norm(np.array(pos1[:2]) - np.array(pos2[:2])) 
+            if distance<min_dist:
+                return False
+        for i, pos2 in enumerate(pos2_multiple):
+            for j, pos2_2nd in enumerate(pos2_multiple):
+                if i==j:
+                    continue
+                if pos2_2nd is None or pos2 is None:
+                    return False
+                distance = np.linalg.norm(np.array(pos2_2nd[:2]) - np.array(pos2[:2])) 
+                if distance<min_dist:
+                    return False
+        return True
+        
     def send_rerun(self) -> dict:
         data = {}    
         for camera in self.cameras:
@@ -101,36 +113,43 @@ class ImitationSimulation:
         return np.array([random.uniform(range[0,0], range[0,1]), random.uniform(range[1,0], range[1,1]),range[2,0]])
 
     def was_placed(self):
-        pick_pos = self.mjdata.body(self.pick_object).xpos.copy()
-        place_pos = self.mjdata.body(self.place_object).xpos.copy()
-        if np.linalg.norm(np.array(pick_pos)[0:2] - np.array(place_pos)[0:2]) <= 0.02 and pick_pos[2]<0.25:
-            return True
+        for pick_object in self.pick_objects:
+            pick_pos = self.mjdata.body(pick_object).xpos.copy()
+            place_pos = self.mjdata.body(self.place_object).xpos.copy()
+            if np.linalg.norm(np.array(pick_pos)[0:2] - np.array(place_pos)[0:2]) > 0.06 or pick_pos[2]>0.25:
+                return False
+        return True
         
     def fell(self):
-        pick_pos = self.mjdata.body(self.pick_object).xpos.copy()
-        if pick_pos[2]<0.1 or pick_pos[2]>2 or abs(pick_pos[0]) > 1.0 or abs(pick_pos[1])>1.0:
-            return True
+        for pick_object in self.pick_objects:
+            pick_pos = self.mjdata.body(pick_object).xpos.copy()
+            if pick_pos[2]<0.1 or pick_pos[2]>2 :
+                return True
+        return False
 
-    def random_placement(self, min_seperation=0.3):
+    def random_placement(self, min_seperation=0.2):
 
         place_range = np.array([[0.4,0.7],[-0.33,0.33],[0.21,0.21]])
-        pick_range = np.array([[0.4,0.7],[-0.33,0.33],[0.25,0.25]])
+        pick_range = np.array([[0.4,0.7],[-0.3,0.3],[0.24,0.24]])
 
-        place_range = np.array([[0.61,0.61],[-0.2,-0.2],[0.21,0.21]])
-        pick_range = np.array([[0.61,0.61],[0.2,0.2],[0.25,0.25]])
+        place_range = np.array([[0.61,0.61],[0.0,0.0],[0.21,0.21]])
+        # pick_range = np.array([[0.61,0.61],[0.2,0.2],[0.25,0.25]])
 
-        place_pos, pick_pos = None, None
-        while not self.is_valid_position(place_pos,pick_pos,min_seperation):
+        place_pos, pick_pos_multiple = None, None
+        while not self.is_valid_position(place_pos,pick_pos_multiple,min_seperation):
+            pick_pos_multiple = []
             place_pos = self.get_pos_from_range(place_range)
-            pick_pos = self.get_pos_from_range(pick_range)
+            for _ in self.pick_objects:
+                pick_pos_multiple.append(self.get_pos_from_range(pick_range))
         
         self.mujocoAR.pause_updates()
         self.mujocoAR.reset_position()
         self.mjdata.qpos[self.actuator_ids] = self.q0
         mujoco.mj_step(self.mjmodel, self.mjdata)
         self.grasp = 0
-        self.mjdata.joint(self.pick_joint).qvel = np.zeros(6)
-        self.mjdata.joint(self.pick_joint).qpos = np.block([pick_pos,1,0,0,0])        
+        for i in range(len(pick_pos_multiple)):
+            self.mjdata.joint(self.pick_joints[i]).qvel = np.zeros(6)
+            self.mjdata.joint(self.pick_joints[i]).qpos = np.block([pick_pos_multiple[i],1,0,0,0])        
         set_body_pose(self.mjmodel,self.place_object,place_pos)
         mujoco.mj_step(self.mjmodel, self.mjdata)
 
