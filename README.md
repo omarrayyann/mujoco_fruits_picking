@@ -51,4 +51,6 @@ self.mujocoAR.start()
 120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/checkpoint_epoch.pth.tar).
 
 
+## Author
 
+Omar Rayyan (olr7742@nyu.edu)
