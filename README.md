@@ -5,12 +5,12 @@ A MuJoCo simulation environment of a fruit picking task. The goal is to pick the
 
 
 <table>
-  <tr>
+<!--   <tr>
     <th><code>camera_name="whole_view"</code></th>
     <th><code>camera_name="top_view"</code></th>
     <th><code>camera_name="side_view"</code></th>
     <th><code>camera_name="front_view"</code></th>
-  </tr>
+  </tr> -->
   <tr>
     <td><img src="https://github.com/user-attachments/assets/1d74ddb7-1f43-4ce4-b994-327d4071eac5" width="300px" /></td>
     <td><img src="https://github.com/user-attachments/assets/8fd2b0ae-f90a-4df5-b114-3feac7c87e37" width="300px" /></td>
