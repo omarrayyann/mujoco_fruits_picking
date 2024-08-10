@@ -67,11 +67,11 @@ self.mujocoAR.start()
 
 120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/checkpoint_epoch.pth.tar).
 
-**Policy Rollout:**
+**Policy Rollout (using an architeceture that can capture multimodality like DP or VQ-BeT might increase the success rate since multimodality lies in the order of picking up the fruits (banana or orange first)):**
 
 <img src="https://github.com/user-attachments/assets/e84345f9-62eb-4d89-a08b-dcd92d1dd10b" width="500px" />
 
-(60% success rate. Using an architeceture that can capture multimodality like DP or VQ-BeT might increase the success rate since multimodality lies in the order of picking up the fruits (banana or orange first))
+
 ## Author
 
 Omar Rayyan (olr7742@nyu.edu)
