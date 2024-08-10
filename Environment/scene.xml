@@ -14,8 +14,9 @@
     <visual>
         <headlight diffuse="0.3 0.3 0.3" ambient="0.2 0.2 0.2" specular="0 0 0"/>
         <rgba haze="0.15 0.25 0.35 1"/>
-        <global azimuth="-120" elevation="-20"/>
+        <global azimuth="-120" elevation="-20"  offwidth="1280" offheight="720"/>
         <quality shadowsize="0"/>
+          
     </visual>
 
     <asset>
@@ -44,8 +45,11 @@
             <geom name="floor" size="3 3 0.05" type="plane" material="floor_material"/>
 
        
-      <camera name="side_camera" pos="0.15 -0.5  0.5734195" quat="0.83812764  0.36486969 -0.13685453 -0.3816844" mode="fixed" fovy="58"/>
-            <camera name="front_camera" pos="1.2 0.0 0.6"  quat="0.6 0.387 0.387 0.6"  mode="fixed" fovy="58"/>
+      <camera name="front_camera" pos="1.2 0.0 0.6"  quat="0.6 0.387 0.387 0.6"  mode="fixed" fovy="58"/>
+      <camera name="whole_camera" pos="0.74723557 -1.01329853  0.80943056"  quat="0.84287993 0.5162384 0.08396784 0.126494" mode="fixed" fovy="58"/>
+      <camera name="side_camera" pos="0.18111726 -0.56994143  0.56640534"  quat="0.83815961  0.45541328 -0.11873173 -0.27566282" mode="fixed" fovy="58"/>
+
+
 
 
     </worldbody>

@@ -23,8 +23,6 @@ class ImitationSimulation:
         self.grasp = 0
         self.button = 0
         self.placement_time = -1
-        self.rgb_renderer = mujoco.Renderer(self.mjmodel, height=480, width=640)
-        self.depth_renderer = mujoco.Renderer(self.mjmodel, height=480, width=640)
         self.rgb_renderer = mujoco.Renderer(self.mjmodel, height=120, width=160)
         self.depth_renderer = mujoco.Renderer(self.mjmodel, height=120, width=160)
         self.depth_renderer.enable_depth_rendering()
@@ -58,9 +56,8 @@ class ImitationSimulation:
         ]
 
         # Recording and Policy Related
-        self.record = False
+        self.record = True
         self.run_policy = False
-
         self.recording_frequency = 10
         self.prev_datas = deque(maxlen=10)
         self.prev_times = deque(maxlen=10)
@@ -137,11 +134,10 @@ class ImitationSimulation:
     def random_placement(self, min_seperation=0.2):
 
         place_range = np.array([[0.4,0.7],[-0.33,0.33],[0.21,0.21]])
+        place_range = np.array([[0.61,0.61],[0.0,0.0],[0.21,0.21]]) # static
+
         pick_range = np.array([[0.4,0.7],[-0.3,0.3],[0.24,0.24]])
-
-        place_range = np.array([[0.61,0.61],[0.0,0.0],[0.21,0.21]])
-        # pick_range = np.array([[0.61,0.61],[0.2,0.2],[0.25,0.25]])
-
+        
         place_pos, pick_pos_multiple = None, None
         while not self.is_valid_position(place_pos,pick_pos_multiple,min_seperation):
             pick_pos_multiple = []
@@ -166,8 +162,8 @@ class ImitationSimulation:
     def start(self):
         
         threading.Thread(target=self.mac_launch).start()
-        if self.run_policy:
-            self.run_model()
+        # if self.run_policy:
+        #     self.run_model()
 
     def mac_launch(self):
 
@@ -178,7 +174,7 @@ class ImitationSimulation:
             
             self.random_placement()
             self.reset_data()
-
+            
             while viewer.is_running():
 
                 step_start = time.time()
@@ -238,6 +234,7 @@ class ImitationSimulation:
         self.camera2_depths.append(camera2_depth)
         self.camera3_rgbs.append(camera3_rgb)
         self.camera3_depths.append(camera3_depth)
+
         self.poses.append(pose)
         self.grasps.append(self.grasp)
         self.times.append(time_diff)
@@ -258,6 +255,7 @@ class ImitationSimulation:
         camera2_depths = np.array(self.camera2_depths)
         camera3_rgbs = np.array(self.camera3_rgbs)
         camera3_depths = np.array(self.camera3_depths)
+
         poses = np.array(self.poses)
         times = np.array(self.times)
         grasps = np.array(self.grasps)
@@ -305,7 +303,7 @@ class ImitationSimulation:
 
     def run_model(self):
 
-        checkpoint_path = "checkpoint_epoch.pth.tar"
+        checkpoint_path = "Model/checkpoint_epoch.pth.tar"
         policy = load_model(checkpoint_path,"cpu")
         last_time = None
         
