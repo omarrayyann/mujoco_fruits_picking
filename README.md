@@ -46,7 +46,9 @@ self.mujocoAR.start()
    
 6. **Enter the IP and Port shown into the app's start screen to start.**
 
-## Pre-Collected Data
+## Pre-Collected Data and Pre-Trained Checkpoint
 
 120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/checkpoint_epoch.pth.tar).
+
+
 
