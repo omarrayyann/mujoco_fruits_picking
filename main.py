@@ -56,7 +56,7 @@ class ImitationSimulation:
         ]
 
         # Recording and Policy Related
-        self.record = True
+        self.record = False
         self.run_policy = False
         self.recording_frequency = 10
         self.prev_datas = deque(maxlen=10)
@@ -162,8 +162,8 @@ class ImitationSimulation:
     def start(self):
         
         threading.Thread(target=self.mac_launch).start()
-        # if self.run_policy:
-        #     self.run_model()
+        if self.run_policy:
+            self.run_model()
 
     def mac_launch(self):
 
