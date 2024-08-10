@@ -1,7 +1,7 @@
 # Fruit Picking Task MuJoCo
 **Part of the [MujocoAR](https://github.com/omarrayyann/MujocoAR) package demos**
 
-A MuJoCo environment (```Environment/scene.xml```) simulation of a simple pick and place task. The robot's goal is to pick fruits from around the table and place them onto the plate placed at the center of the table. The simulation includes an operational space controller to handle the movement of a KUKA-iiwa14 arm with a 2f85 grasper at the end.
+A MuJoCo simulation environment of a fruit picking task. The goal is to pick the fruits around the table and place them onto the plate at the center of the table. The simulation includes an operational space controller to handle the movement of the KUKA-iiwa14 arm with a 2f85 grasper at the end.
 
 
 ## Usage Guide
@@ -25,7 +25,7 @@ A MuJoCo environment (```Environment/scene.xml```) simulation of a simple pick a
    ```bash
    mjpython main.py
    
-6. **Enter the IP and Port shown into the app's start screen to start.**:
+6. **Enter the IP and Port shown into the app's start screen to start.**
 
 
    
