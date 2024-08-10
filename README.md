@@ -3,6 +3,25 @@
 
 A MuJoCo simulation environment of a fruit picking task. The goal is to pick the fruits around the table and place them onto the plate at the center of the table. The simulation includes an operational space controller to handle the movement of the KUKA-iiwa14 arm with a 2f85 grasper at the end.
 
+## MuJoCo AR Setup
+
+```python
+# Initializing MuJoCo AR
+self.mujocoAR = MujocoARConnector(mujoco_model=self.mjmodel,mujoco_data=self.mjdata)
+
+# Linking a Target Site with the AR Position
+self.mujocoAR.link_site(
+   name="eef_target",
+   scale=3.0,
+   translation=self.pos_origin,
+   toggle_fn=lambda: setattr(self, 'grasp', not self.grasp),
+   button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time()), self.reset_data()) if time.time() - self.placement_time > 2.0 else None,
+   disable_rot=True,
+)
+
+# Start!
+self.mujocoAR.start()
+```
 
 ## Usage Guide
 
