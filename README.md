@@ -1,4 +1,4 @@
-# Fruit Picking Task MuJoCo
+# MuJoCo Fruit Picking Task 
 **Part of the [MujocoAR](https://github.com/omarrayyann/MujocoAR) package demos**
 
 A MuJoCo simulation environment of a fruit picking task. The goal is to pick the fruits around the table and place them onto the plate at the center of the table. The simulation includes an operational space controller to handle the movement of the KUKA-iiwa14 arm with a 2f85 grasper at the end.
