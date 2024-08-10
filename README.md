@@ -29,7 +29,7 @@ A MuJoCo simulation environment of a fruit picking task. The goal is to pick the
 
 ## Pre-Collected Data
 
-120 Collected Episodes can be downloade [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip)
+120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here]()
 
 Main methods and attributes:
 
