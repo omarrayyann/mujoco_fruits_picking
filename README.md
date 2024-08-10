@@ -27,9 +27,9 @@ A MuJoCo simulation environment of a fruit picking task. The goal is to pick the
    
 6. **Enter the IP and Port shown into the app's start screen to start.**
 
+## Pre-Collected Data
 
-   
-Pre-collected Data using MujocoAR: https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip
+120 Episodes https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip
 
 Main methods and attributes:
 
