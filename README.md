@@ -3,6 +3,16 @@
 
 A MuJoCo simulation environment of a fruit picking task. The goal is to pick the fruits around the table and place them onto the plate at the center of the table. The simulation includes an operational space controller to handle the movement of the KUKA-iiwa14 arm with a 2f85 grasper at the end.
 
+<table>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/1d74ddb7-1f43-4ce4-b994-327d4071eac5" width="250px" /></td>
+    <td><img src="https://github.com/user-attachments/assets/8fd2b0ae-f90a-4df5-b114-3feac7c87e37" width="250px" /></td>
+    <td><img src="https://github.com/user-attachments/assets/286428d9-93bf-456b-9ef1-322793c0bb3a" width="250px" /></td>
+    <td><img src="https://github.com/user-attachments/assets/3d496ce1-0b5d-4a1f-a6d2-dc2e19d1e3d8" width="250px" /></td>
+  </tr>
+</table>
+
+
 | ```camera_name="whole_view"``` | ```camera_name="top_view"``` | ```camera_name="side_view"``` | ```camera_name="front_view"``` |
 |:---:|:---:|:---:|:---:|
 | ![camera4](https://github.com/user-attachments/assets/1d74ddb7-1f43-4ce4-b994-327d4071eac5) | ![camera3](https://github.com/user-attachments/assets/8fd2b0ae-f90a-4df5-b114-3feac7c87e37) | ![camera2](https://github.com/user-attachments/assets/286428d9-93bf-456b-9ef1-322793c0bb3a) | ![camera1](https://github.com/user-attachments/assets/3d496ce1-0b5d-4a1f-a6d2-dc2e19d1e3d8) |
