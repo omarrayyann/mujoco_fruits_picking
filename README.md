@@ -61,7 +61,7 @@ self.mujocoAR.start()
    ```bash
    mjpython main.py
    
-6. **Enter the IP and Port shown into the app's start screen to start.**
+6. **Enter the IP and Port shown into the app's start screen to start. Make sure to be connected to the same Wi-Fi network as the device. Incase of a latency, I recommend connecting to your phone's hotspot.**
 
 ## Pre-Collected Data and Pre-Trained Checkpoint
 
