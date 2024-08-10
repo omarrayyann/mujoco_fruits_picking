@@ -7,6 +7,9 @@ from controller import OpsaceController
 from mujoco_ar import MujocoARConnector
 import random
 import rerun as rr
+import threading
+from Model.model import *
+from collections import deque
 
 class ImitationSimulation:
     
@@ -38,7 +41,6 @@ class ImitationSimulation:
         self.pos_origin = self.target_pos.copy()
         self.rot_origin = self.target_rot.copy()
         self.target_quat = np.zeros(4)
-        self.rerun = False
         self.eef_site_name = 'eef'
         self.site_id = self.mjmodel.site(self.eef_site_name).id
         self.camera_name = 'gripper_camera'
@@ -55,8 +57,13 @@ class ImitationSimulation:
             
         ]
 
-        # Recording
+        # Recording and Policy Related
+        self.record = False
+        self.run_policy = False
+
         self.recording_frequency = 10
+        self.prev_datas = deque(maxlen=10)
+        self.prev_times = deque(maxlen=10)
 
         # Controller
         self.controller = OpsaceController(self.mjmodel,self.joint_names,self.eef_site_name)
@@ -72,15 +79,13 @@ class ImitationSimulation:
         # Linking the target site with the AR position
         self.mujocoAR.link_site(
             name="eef_target",
-            scale=2.0,
+            scale=3.0,
             translation=self.pos_origin,
             toggle_fn=lambda: setattr(self, 'grasp', not self.grasp),
-            button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time())) if time.time() - self.placement_time > 2.0 else None,
+            button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time()), self.reset_data()) if time.time() - self.placement_time > 2.0 else None,
             disable_rot=True,
         )
 
-        if self.rerun:
-            rr.init("IIWA-KUKA", spawn=True)
     
     def is_valid_position(self, pos1, pos2_multiple, min_dist):
         if pos1 is None or pos2_multiple is None:
@@ -100,13 +105,15 @@ class ImitationSimulation:
                     return False
         return True
         
-    def send_rerun(self) -> dict:
+    def get_camera_data(self) -> dict:
         data = {}    
         for camera in self.cameras:
             self.rgb_renderer.update_scene(self.mjdata, camera)
             self.depth_renderer.update_scene(self.mjdata, camera)
             data[camera+"_rgb"] = self.rgb_renderer.render()
             data[camera+"_depth"] = self.depth_renderer.render()
+        self.prev_datas.append(data)
+        self.prev_times.append(time.time())
         return data
     
     def get_pos_from_range(self,range):
@@ -116,7 +123,7 @@ class ImitationSimulation:
         for pick_object in self.pick_objects:
             pick_pos = self.mjdata.body(pick_object).xpos.copy()
             place_pos = self.mjdata.body(self.place_object).xpos.copy()
-            if np.linalg.norm(np.array(pick_pos)[0:2] - np.array(place_pos)[0:2]) > 0.06 or pick_pos[2]>0.25:
+            if np.linalg.norm(np.array(pick_pos)[0:2] - np.array(place_pos)[0:2]) > 0.07 or pick_pos[2]>0.25:
                 return False
         return True
         
@@ -157,17 +164,25 @@ class ImitationSimulation:
         self.mujocoAR.resume_updates()
 
     def start(self):
-        self.mujocoAR.start()
-        self.mac_launch()
+        
+        threading.Thread(target=self.mac_launch).start()
+        if self.run_policy:
+            self.run_model()
 
     def mac_launch(self):
 
+        if not self.run_policy:
+            self.mujocoAR.start()
+
         with mujoco.viewer.launch_passive(self.mjmodel,self.mjdata,show_left_ui=False,show_right_ui=False) as viewer:
+            
             self.random_placement()
+            self.reset_data()
 
             while viewer.is_running():
 
                 step_start = time.time()
+                self.record_data()   
 
                 tau = self.controller.get_tau(self.mjmodel,self.mjdata,self.target_pos,self.target_rot)
                 self.mjdata.ctrl[self.actuator_ids] = tau[self.actuator_ids]
@@ -175,9 +190,13 @@ class ImitationSimulation:
                 mujoco.mj_step(self.mjmodel, self.mjdata)
                 viewer.sync()
 
-                if self.was_placed() or self.fell() or self.button:
+                if self.was_placed() or self.fell():
+                    self.record_data()   
+                    if not self.fell() and time.time()-self.placement_time > 2.0:
+                        self.save_data()
                     if time.time()-self.placement_time > 2.0 or self.placement_time==-1:
                         self.random_placement()
+                        self.reset_data()
                         self.placement_time = time.time()
                 
                 self.target_pos = self.mjdata.site("eef_target").xpos.copy()
@@ -186,8 +205,156 @@ class ImitationSimulation:
                 if time_until_next_step > 0:
                     time.sleep(time_until_next_step)
 
+    def record_data(self):
+
+        if not self.record:
+            return
+     
+        if self.camera_data is not None and self.last_recording_time != -1 and time.time()-self.last_recording_time < (1/self.recording_frequency):
+            return
+        
+        if self.record_start_time == None:
+            self.record_start_time = time.time()
+            time_diff = 0.0
+        else:
+            time_diff = time.time() - self.record_start_time
+        pose = np.identity(4)
+        pose[0:3,3] = self.mjdata.site(self.site_id).xpos.copy()
+        pose[0:3,0:3] = self.mjdata.site(self.site_id).xmat.copy().reshape((3,3))
+
+        q = self.mjdata.qpos[self.dof_ids].copy()
+        dq = self.mjdata.qvel[self.dof_ids].copy()
+        
+        camera1_rgb = self.camera_data[self.cameras[0]+"_rgb"]
+        camera1_depth = self.camera_data[self.cameras[0]+"_depth"]
+        camera2_rgb = self.camera_data[self.cameras[1]+"_rgb"]
+        camera2_depth = self.camera_data[self.cameras[1]+"_depth"]
+        camera3_rgb = self.camera_data[self.cameras[2]+"_rgb"]
+        camera3_depth = self.camera_data[self.cameras[2]+"_depth"] 
+
+        self.camera1_rgbs.append(camera1_rgb)
+        self.camera1_depths.append(camera1_depth)
+        self.camera2_rgbs.append(camera2_rgb)
+        self.camera2_depths.append(camera2_depth)
+        self.camera3_rgbs.append(camera3_rgb)
+        self.camera3_depths.append(camera3_depth)
+        self.poses.append(pose)
+        self.grasps.append(self.grasp)
+        self.times.append(time_diff)
+        self.q.append(q)
+        self.dq.append(dq)
+
+        self.last_recording_time = time.time()
+
+    def save_data(self):
+
+        if not self.record:
+            return
+
+        new_file_name = "Data/" + str(get_latest_number("Data")+1)+".npz"
+        camera1_rgbs = np.array(self.camera1_rgbs)
+        camera1_depths = np.array(self.camera1_depths)
+        camera2_rgbs = np.array(self.camera2_rgbs)
+        camera2_depths = np.array(self.camera2_depths)
+        camera3_rgbs = np.array(self.camera3_rgbs)
+        camera3_depths = np.array(self.camera3_depths)
+        poses = np.array(self.poses)
+        times = np.array(self.times)
+        grasps = np.array(self.grasps)
+        q = np.array(self.q)
+        dq = np.array(self.dq)
+
+        np.savez(new_file_name, camera1_rgbs=camera1_rgbs, camera1_depths=camera1_depths, camera2_rgbs=camera2_rgbs, camera2_depths=camera2_depths, camera3_rgbs=camera3_rgbs, camera3_depths=camera3_depths, poses=poses, grasps=grasps, times=times, q=q, dq=q)
+
+    def reset_data(self):
+        self.camera1_rgbs = []
+        self.camera1_depths = []
+        self.camera2_rgbs = []
+        self.camera2_depths = []
+        self.camera3_rgbs = []
+        self.camera3_depths = []
+        self.poses = []
+        self.times = []
+        self.grasps = []
+        self.q = []
+        self.dq = []
+        self.record_start_time = time.time()
+    
+    def run_poses_from_npz(self, npz_file_path):
+
+        data = np.load(npz_file_path)
+        poses = data['poses']
+        times = data['times']
+        grasps = data['grasps']
+
+        while True:
+          
+            start_time = time.time()
+            data_time = times[0]
+
+            i = 1
+
+            while i<len(poses)-1:
+                
+                # Set the pose
+                if (time.time()-start_time) - (times[i]-data_time) >= 0:
+                    set_site_pose(self.mjmodel,"eef_target",poses[i][0:3,3])
+                    self.grasp = grasps[i]
+                    i += 1
+
+
+    def run_model(self):
+
+        checkpoint_path = "checkpoint_epoch.pth.tar"
+        policy = load_model(checkpoint_path,"cpu")
+        last_time = None
+        
+        while True:
+
+            sim.camera_data = sim.get_camera_data()
+        
+            if (last_time is None or (time.time()-last_time) >= 1/5):
+                
+            
+                last_data = self.prev_datas[-1]
+                last_time = self.prev_times[-1]
+
+                prev_data = self.prev_datas[0]
+                j = 0
+                for i, prev_time in enumerate(self.prev_times):
+                    if last_time - prev_time >= 0.2:
+                        prev_data = self.prev_datas[i]
+                        j = i
+                    else:
+                        break
+                
+                print(self.prev_times[j]-self.prev_times[-1])
+                            
+                rgb1 = last_data["top_camera_rgb"]
+                depth1 = last_data["top_camera_depth"]
+                rgb2 = last_data["front_camera_rgb"]
+                depth2 = last_data["front_camera_depth"]
+
+                prev_rgb1 = prev_data["top_camera_rgb"]
+                prev_depth1 = prev_data["top_camera_depth"]
+                prev_rgb2 = prev_data["front_camera_rgb"]
+                prev_depth2 = prev_data["front_camera_depth"]
+
+                delta_pos = predict_action(policy, rgb1, depth1, rgb2, depth2, prev_rgb1, prev_depth1, prev_rgb2, prev_depth2, torch.tensor([sim.mjdata.site(sim.site_id).xpos.copy()]).float(), torch.tensor([[sim.grasp]]), "cpu")[0]
+                
+                new_pos = sim.mjdata.site("eef_target").xpos.copy()+delta_pos[:3]
+                new_pos[2] =  max(new_pos[2],0.21)
+
+                set_site_pose(sim.mjmodel,"eef_target",new_pos,None)
+
+                sim.grasp = round(delta_pos[-1])
+                last_time = time.time()
+
+
 if __name__ == "__main__":
 
     sim = ImitationSimulation()
-
     sim.start()
+
+    while True:
+        sim.camera_data = sim.get_camera_data()

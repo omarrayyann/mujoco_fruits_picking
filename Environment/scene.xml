@@ -35,7 +35,7 @@
 
     <worldbody>
 
-    <site name="eef_target" pos="0.5 0.0 0.4" rgba="0 0 0 0" />
+    <site name="eef_target" pos="0.5 0.0 0.4" rgba="1 0 0 0" />
 
         <light pos="0 0 4.5" dir="0 0 -1" directional="true"/>
          <light pos="0 4.5 0.6" dir="0 -1 0" directional="true"/>

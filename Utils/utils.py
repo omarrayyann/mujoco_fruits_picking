@@ -15,6 +15,17 @@ def set_geom_pose(model, name, pos=None, rot=None, debug_mode=True):
             model.geom_quat[target_geom_id] = quat
         model.geom_rgba[target_geom_id][3] = 0.5
 
+def set_site_pose(model, name, pos=None, rot=None, debug_mode=True):
+    if debug_mode:
+        target_site_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_SITE, name)
+        if pos is not None:
+            model.site_pos[target_site_id] = pos.tolist()
+        if rot is not None:
+            quat = np.zeros(4)
+            mujoco.mju_mat2Quat(quat,rot.flatten())
+            model.site_quat[target_site_id] = quat
+        model.site_rgba[target_site_id][3] = 0.0
+
 def set_geom_size(model, name, size):
         target_geom_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_GEOM, name)
         model.geom_size[target_geom_id] = size
