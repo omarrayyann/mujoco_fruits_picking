@@ -29,12 +29,5 @@ A MuJoCo simulation environment of a fruit picking task. The goal is to pick the
 
 ## Pre-Collected Data
 
-120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here]().
+120 Collected Episodes can be downloaded [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/Data.zip). A pre-trained policy checkpoint can be found [here](https://huggingface.co/datasets/omarrayyann/mujoco_pick_place_fruits/blob/main/checkpoint_epoch.pth.tar).
 
-Main methods and attributes:
-
-- `__init__(self)`: Initializes the simulation environment, controller, and MujocoAR connector.
-- `random_placement(self, min_seperation=0.1)`: Places the objects randomly in the scene with specified separation constraints.
-- `start(self)`: Starts the simulation and control loop.
-- `done(self)`: Checks if the task is completed.
-- `fell(self)`: Checks if the object has fallen.
