@@ -5,10 +5,9 @@ import time
 from Utils.utils import *
 from controller import OpsaceController
 from mujoco_ar import MujocoARConnector
-import random
-import rerun as rr
-import threading
 from Model.model import *
+import random
+import threading
 from collections import deque
 
 class ImitationSimulation:
@@ -77,7 +76,7 @@ class ImitationSimulation:
         self.mujocoAR.link_site(
             name="eef_target",
             scale=3.0,
-            translation=self.pos_origin,
+            position_origin=self.pos_origin,
             toggle_fn=lambda: setattr(self, 'grasp', not self.grasp),
             button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time()), self.reset_data()) if time.time() - self.placement_time > 2.0 else None,
             disable_rot=True,
