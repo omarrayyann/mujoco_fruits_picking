@@ -202,7 +202,7 @@ class ImitationSimulation:
 
     def record_data(self):
 
-        if not self.record:
+        if not self.record or self.camera_data is None:
             return
      
         if self.camera_data is not None and self.last_recording_time != -1 and time.time()-self.last_recording_time < (1/self.recording_frequency):
