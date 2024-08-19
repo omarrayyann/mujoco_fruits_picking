@@ -54,7 +54,7 @@ self.mujocoAR.start()
    pip install mujoco_ar
    pip install requirements.txt
    
-4. **Download the [MuJoCo AR App](https://apps.apple.com/jo/app/past-code/id1551535957) from the App Store.**
+4. **Download the [MuJoCo AR App](https://apps.apple.com/ae/app/mujoco-ar/id6612039501) from the App Store.**
    
 5. **Run the application**:
 
