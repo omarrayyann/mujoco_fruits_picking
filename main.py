@@ -75,7 +75,7 @@ class ImitationSimulation:
         # Linking the target site with the AR position
         self.mujocoAR.link_site(
             name="eef_target",
-            scale=3.0,
+            scale=2.75,
             position_origin=self.pos_origin,
             toggle_fn=lambda: setattr(self, 'grasp', not self.grasp),
             button_fn=lambda: (self.random_placement(), setattr(self, 'placement_time', time.time()), self.reset_data()) if time.time() - self.placement_time > 2.0 else None,
